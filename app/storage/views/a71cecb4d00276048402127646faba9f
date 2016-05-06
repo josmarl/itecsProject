@@ -1,0 +1,27 @@
+<?php $__env->startSection('content'); ?>
+<section ng-controller="ctrlDashboard">
+    <div class="form-group">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border legend-label versalita">Buscar Por Ubigeo</legend>
+            <section class="row">
+                <input type="hidden" ng-value="<?php echo $n_usuario; ?>">
+                <label class="col-sm-2">Proceso Electoral</label>
+                <div class="col-md-10">
+                    <select class="combobox form-control" name="theinput1" id="theinput1" ng-click="selectDepartamento" required="1" ng-model="departamento" ng-change="listarProvincia()">                                        
+                        <option value="" selected="selected">- Seleccione -</option>
+                        <option ng-repeat="item in lDep" value="<%item.ubigeo%>" ><%item.departamento%></option>
+                    </select>
+                </div>
+            </section>         
+        </fieldset>
+    </div>
+    <!--<div class="vertical-center">
+        <button type="button" class="btn button-cmasiva" ng-click="goToRegMasivo()">Permite realizar el registro<br> de electores en listas de forma masiva</button>    
+    </div>-->
+</section>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection("javascript-ini"); ?>        
+<?= HTML::script('js/library/angularjs/controllers/dashboard.js') ?> 
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.main.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

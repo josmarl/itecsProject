@@ -1,0 +1,153 @@
+
+<div ng-controller="ctrlConsultaCredencialCargo">
+     
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border"><span>B</span>ÚSQUEDA</legend>
+            <label class="control-label col-md-1 labelfield">{{$tipoAmbito}}:</label>
+            <div class="col-md-2">
+                @if(count($ambitos)>1)
+                <select ng-model="ambito" ng-change="getUbigeos()" class="form-control combobox">
+                        <option value="0">SELECCIONAR</option>
+                        @foreach($ambitos as $ambito)
+                        <option value="{{$ambito->n_ambito_pk}}">{{$ambito->c_alias}}</option>
+                        @endforeach
+                </select>
+                @else
+                <div style="display:none;">
+                    [[ambito={{$ambitos->n_ambito_pk}}]]
+                </div>
+                <input type="hidden" ng-model="ambito"  value="{{$ambitos->n_ambito_pk}}" />
+                <input type="text"  class="form-control input-text"  readonly value="{{$ambitos->c_alias}}" />
+                @endif
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-sm-12 text-right">
+                <!--<input type="button" class="botomAceptar" value="Consultar" ng-click="consultar()" ng-disabled="isBusy"/>-->
+                <button class="botomAceptar" ng-click="consultar()" ng-disabled="isBusy">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Buscar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </button>
+            </div>
+        </div>
+	<div id="loading">
+	</div>
+        <fieldset class="scheduler-border" ng-show="showContent"  ng-cloak>
+            <legend class="scheduler-border"><span>R</span>ESULTADOS</legend>
+            <p ng-show="showMessage" ng-cloak>[[message]]</p>
+                <table class="table table-excel heading">
+                        <thead>
+                            <tr>
+                                <th width="120px" class="backgroundHeadTableA" rowspan="2">Distrito</th>
+                                <th width="70px" class="backgroundHeadTableB" rowspan="2">Mesas</th>
+                                <th width="50px" class="backgroundHeadTableA" rowspan="2">MM</th>
+                                <th width="150px" class="backgroundHeadTableB" colspan="3">Presidente</th>
+                                <th width="150px" class="backgroundHeadTableA" colspan="3">Secretario</th>
+                                <th width="150px" class="backgroundHeadTableB" colspan="3">3er Miembro</th>
+                                <th width="150px" class="backgroundHeadTableA" colspan="3">1er Suplente</th>
+                                <th width="150px" class="backgroundHeadTableB" colspan="3">2do Suplente</th>
+                                <th width="150px" class="backgroundHeadTableA" colspan="3">3er Suplente</th>
+                                <th width="150px" class="backgroundHeadTableB" colspan="3">Total</th>
+                                <th width="1%" class="backgroundHeadTableB">&nbsp;</th>
+                            </tr>
+                            <tr>
+                                <th width="50px" class="backgroundHeadTableB">E</th>
+                                <th width="50px" class="backgroundHeadTableB">NE</th>
+                                <th width="50px" class="backgroundHeadTableB">E%</th>
+
+                                <th width="50px" class="backgroundHeadTableA">E</th>
+                                <th width="50px" class="backgroundHeadTableA">NE</th>
+                                <th width="50px" class="backgroundHeadTableA">E%</th>
+
+                                <th width="50px" class="backgroundHeadTableB">E</th>
+                                <th width="50px" class="backgroundHeadTableB">NE</th>
+                                <th width="50px" class="backgroundHeadTableB">E%</th>
+
+                                <th width="50px" class="backgroundHeadTableA">E</th>
+                                <th width="50px" class="backgroundHeadTableA">NE</th>
+                                <th width="50px" class="backgroundHeadTableA">E%</th>
+
+                                <th width="50px" class="backgroundHeadTableB">E</th>
+                                <th width="50px" class="backgroundHeadTableB">NE</th>
+                                <th width="50px" class="backgroundHeadTableB">E%</th>
+
+                                <th width="50px" class="backgroundHeadTableA">E</th>
+                                <th width="50px" class="backgroundHeadTableA">NE</th>
+                                <th width="50px" class="backgroundHeadTableA">E%</th>
+
+                                <th width="50px" class="backgroundHeadTableB">E</th>
+                                <th width="50px" class="backgroundHeadTableB">NE</th>
+                                <th width="50px" class="backgroundHeadTableB">E%</th>
+                                <th width="1%" class="backgroundHeadTableB">&nbsp;</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="form-scroll-report">
+                            <table ng-show="!showMessage" class="table table-excel table-nopadding" ng-cloak>
+                                <tbody>
+                                    <tr ng-repeat="item in filterLista">
+                                            <td width="120px" style="word-wrap: break-word!important;">[[item.c_distrito]]</td>
+                                            <td width="70px">[[item.mesas]]</td>
+                                            <td width="50px">[[item.mm]]</td>
+                                            <td width="50px">[[item.epre]]</td>
+                                            <td width="50px">[[item.nepre]]</td>
+                                            <td width="50px">[[(getPercentage(item.epre,item.nepre) | number:2)]]%</td>
+                                            <td width="50px">[[item.esec]]</td>
+                                            <td width="50px">[[item.nesec]]</td>
+                                            <td width="50px">[[(getPercentage(item.esec,item.nesec) | number:2)]]%</td>
+                                            <td width="50px">[[item.eter]]</td>
+                                            <td width="50px">[[item.neter]]</td>
+                                            <td width="50px">[[(getPercentage(item.eter,item.neter) | number:2)]]%</td>
+                                            <td width="50px">[[item.epsu]]</td>
+                                            <td width="50px">[[item.nepsu]]</td>
+                                            <td width="50px">[[(getPercentage(item.epsu,item.nepsu) | number:2)]]%</td>
+                                            <td width="50px">[[item.essu]]</td>
+                                            <td width="50px">[[item.nessu]]</td>
+                                            <td width="50px">[[(getPercentage(item.essu,item.nessu) | number:2)]]%</td>
+                                            <td width="50px">[[item.etsu]]</td>
+                                            <td width="50px">[[item.netsu]]</td>
+                                            <td width="50px">[[(getPercentage(item.etsu,item.netsu) | number:2)]]% </td>
+                                            <td width="50px">[[item.te]]</td>
+                                            <td width="50px">[[item.tne]]</td>
+                                            <td width="50px">[[(item.perc | number:2)]]% </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="backgroundHeadTableB" colspan="3">Total</td>
+                                        <td class="backgroundHeadTableB"> [[tepre]]</td>
+                                        <td class="backgroundHeadTableB"> [[tnepre]]</td>
+                                        <td class="backgroundHeadTableB"> </td>
+                                        <td class="backgroundHeadTableB"> [[tesec]]</td>
+                                        <td class="backgroundHeadTableB"> [[tnesec]]</td>
+                                        <td class="backgroundHeadTableB"> </td>
+                                        <td class="backgroundHeadTableB"> [[teter]]</td>
+                                        <td class="backgroundHeadTableB"> [[tneter]]</td>
+                                        <td class="backgroundHeadTableB"> </td>
+                                        <td class="backgroundHeadTableB"> [[tepsu]]</td>
+                                        <td class="backgroundHeadTableB"> [[tnepsu]]</td>
+                                        <td class="backgroundHeadTableB"> </td>
+                                        <td class="backgroundHeadTableB"> [[tessu]]</td>
+                                        <td class="backgroundHeadTableB"> [[tnessu]]</td>
+                                        <td class="backgroundHeadTableB"> </td>
+                                        <td class="backgroundHeadTableB"> [[tetsu]]</td>
+                                        <td class="backgroundHeadTableB"> [[tnetsu]] </td>
+                                        <td class="backgroundHeadTableB"> </td>
+                                        <td class="backgroundHeadTableB"> [[tet]]</td>
+                                        <td class="backgroundHeadTableB"> [[tne]] </td>
+                                        <td class="backgroundHeadTableB"> </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                    </div>
+
+                <uib-pagination ng-show="showPagination"
+                boundary-links="true" 
+                max-size="maxSize" items-per-page="numPerPage" 
+                total-items="totalItems" ng-model="currentPage"  class="pagination-sm"
+                previous-text="&lsaquo;" next-text="&rsaquo;" 
+                first-text="&laquo;" last-text="&raquo;">
+                </uib-pagination>
+                <input type="button" class="ico_excel"  ng-click="exportar()" ng-show="filterLista.length>0"/>   
+        </fieldset>
+</div>
+

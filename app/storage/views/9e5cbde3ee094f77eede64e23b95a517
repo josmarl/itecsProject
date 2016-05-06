@@ -1,0 +1,59 @@
+<?php $__env->startSection('content'); ?>
+
+<div class="wrapper">
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="layer-Main row-fluid">
+        <div class="span24 wrap">
+            <div class="span13 panel-left">
+                <div class="contNameEleccion">
+                    <div id="loginNameEleccion"></div>
+                </div>
+                <div class="logo"></div>
+                <div class="span13 line_left">    
+                    <label>Módulo de Credenciales</label>
+                </div>
+            </div>
+            <div class="span11 panel-right">
+                <form action="<?php echo URL::to('/'); ?>/usuario/login" method="post">
+                    <div class="span11 telf">
+                        <div class="span11 form-login">
+                            <div class="form-group-login">    
+                                <?php echo Form::text('username',null,array('class' =>'usu onlyText','placeholder'=>'Usuario','id'=>'username','name'=>'username','ng-model'=>'username','ng-keyup'=>'validateEmptyLogin()','maxlength'=>'15','autocomplete'=>'off'));; ?>
+
+                                <?php echo Form::password('password',array('class' =>'pass','placeholder'=>'Contraseña','maxlength'=>'20','ng-model'=>'password','ng-keyup'=>'validateEmptyLogin()','autocomplete'=>'off'));; ?>
+
+                            </div>
+                            <div class="form-icon">
+                                <div class="icon-usu"></div>
+                                <div class="icon-pass"></div>
+                            </div>
+                            <div class="box-red"></div>
+                            <div class="form-button transition">
+                                <button type="submit">INGRESAR</button>
+                            </div>
+                            <div class="box-bottom">
+                            </div>
+                            <div class="sombra">
+                            </div>
+                        </div>
+                        <div class="span5">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!--<div class="span6">
+                <div class="span6 line_right"></div>
+            </div>-->
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection("javascript-ini"); ?>        
+<?= HTML::script('js/library/angularjs/controllers/login.js') ?> 
+<?php $__env->stopSection(); ?>
+
+
+
+
+<?php echo $__env->make('layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,51 @@
+img{max-width:100%}
+a,abbr,acronym,address,applet,article,aside,audio,big,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,font,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,tbody,tfoot,th,thead,time,tt,ul,var,video{border:0;margin:0;outline:0;padding:0}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+p
+:focus{outline:0}
+ol,ul{list-style:none}
+table{//float:left;
+      margin:auto}
+caption,td,th{font-weight:400;text-align:left}
+blockquote:after,blockquote:before,q:after,q:before{content:""}
+blockquote,q{quotes:"" ""}
+.clear{clear:both}.container-fluid{*zoom:1}
+.container-fluid:after,.container-fluid:before{display:table;content:"";line-height:0}
+.container-fluid:after{clear:both}.row-fluid{width:100%;*zoom:1}
+.row-fluid:after,.row-fluid:before{display:table;content:"";line-height:0}
+.row-fluid:after{clear:both}
+.row-fluid [class*=span]{display:block;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;float:left;}
+.row-fluid [class*=span]:first-child{margin-left:0!important}
+.row-fluid .span24{width:100%;*width:99.9468085107%;margin-left:0}
+.row-fluid .span23{width:95.7983193277%;*width:95.7451278384%}
+.row-fluid .span22{width:91.5966386555%;*width:91.5434471662%}
+.row-fluid .span21{width:87.3949579832%;*width:87.3417664939%}
+.row-fluid .span20{width:83.1932773109%;*width:83.1400858216%}
+.row-fluid .span19{width:78.9915966387%;*width:78.9384051494%}
+.row-fluid .span18{width:74.7899159664%;*width:74.7367244771%}
+.row-fluid .span17{width:70.5882352941%;*width:70.5350438048%}
+.row-fluid .span16{width:66.3865546218%;*width:66.3333631325%}
+.row-fluid .span15{width:62.1848739496%;*width:62.1316824602%}
+.row-fluid .span14{width:57.9831932773%;*width:57.930001788%}
+.row-fluid .span13{width:54.6%;*width: 54.6%;}
+.row-fluid .span12{width:49.5798319%;*width:49.5266404%}
+.row-fluid .span11{width:45.3781513%;*width:45.3249598%}
+.row-fluid .span10{width:41.1764706%;*width:41.1232791%}
+.row-fluid .span9{width:36.9747899%;*width:36.9215984%}
+.row-fluid .span8{width:32.7731092%;*width:32.7199177%}
+.row-fluid .span7{width:30.2%;*width:30.2%}
+.row-fluid .span6{width:24.369747899159663%;*width:24.316556409809664%}
+.row-fluid .span5{width:20.168067226890756%;*width:20.114875737540757%}
+.row-fluid .span4{width:15.966386554621849%;*width:15.913195065271848%}
+.row-fluid .span3{width:11.764705882352942%;*width:11.711514393002942%}
+.row-fluid .span2{width:7.563025210084033%;*width:7.509833720734034%}
+.row-fluid .span1{width:3.361344537815126%;*width:3.308153048465126%}
+.row-fluid .span0{margin-left:0!important}
+.row-fluid [class*=span].hide,[class*=span].hide{display:none}.row-fluid [class*=span].pull-right,[class*=span].pull-right{float:right}
+
+.contenido{
+    height: 100%;
+}
+.content{
+    height: 77.3%;
+}

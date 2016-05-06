@@ -1,0 +1,79 @@
+<?php $__env->startSection('content'); ?>
+
+
+<section>
+    <div class="contentdash">
+        <div class="content-header">
+            <div class="c-header">
+                <img class="img-header" src="<?php echo URL::to('/'); ?>/img/Monitoreo_parte1.jpg" alt="EVA">                
+            </div>            
+            
+        </div>                
+        <div class="content-section container">
+            
+            <div class="content-logo">                
+                <img class="img-logo" src="<?php echo URL::to('/'); ?>/img/Eva- Principal_eva.png" alt="EVA">                             
+            </div> 
+            
+            <div class="content-buttons">                
+                <div class="box-buttons">
+                    <input type="hidden" value="<?php echo $i=0; ?>">
+                    <?php foreach($modulos as $itemMod): ?>
+                    <div class="btn-dash">
+                        <a  href="<?php echo URL::to('/'); ?>/<?php echo $itemMod->c_url; ?>?mod=<?php echo $itemMod->n_ux_modulo_pk; ?>">
+                            <div class="buttons<?php echo $i=$i+1; ?>"></div>
+                            <div class="text-monitoreoleft">
+                               <?php echo $itemMod->c_descripcion; ?>
+
+                            </div>
+                        </a>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                
+            </div>             
+            
+        </div>
+        <div class="content-footer">
+            <div class="row no-gutter">
+                <div class="col-xs-6 col-sm-8 col-md-10 col-lg-10">
+                </div>
+                <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2 usuario showhide">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="<?php echo URL::to('/'); ?>/img/admin-ico.png" alt="EVA">   </div>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"><label class="c_usuario"><?php echo Session::get('usuario.username'); ?><br/>(<?php echo Session::get('usuario.perfilName'); ?>)</label></div>
+                    <div class="slidedivs">
+                    <?php if(Session::get('usuario.perfilid')): ?>
+                        <a href="#" class="cerrar-sesion" data-toggle="modal" data-target="#modalCloseSession">CERRAR SESIÓN</a>
+                    <?php endif; ?>
+                </div>
+                </div>                
+            </div>
+
+            <div class="modal fade" id="modalCloseSession" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="ctrlLink">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content modal-close-session">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">INFORMACIÓN</h4>
+                        </div>
+                        <div class="modal-body">
+                            ¿Está seguro de cerrar sesión?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn-cuadrado btn-confirm-close-session btn-accept" href="#" ng-click="salir()" ng-cloak>&nbsp;&nbsp;&nbsp;&nbsp;Aceptar&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                            <button type="button" class="btn-cuadrado btn-cancel-close-session btn-cancel" data-dismiss="modal">&nbsp;&nbsp;&nbsp;&nbsp;Cancelar&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            
+        </div>
+    </div> 
+</section>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection("javascript"); ?>        
+	<?= HTML::script('js/dashboard.js') ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

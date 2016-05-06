@@ -1,0 +1,106 @@
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+    th{text-align: center;}
+</style>
+<table  border="1" >
+    <thead>
+        <tr>
+            <th colspan="12"><strong>REPORTE DE MESAS POR ENTREGA DE CREDENCIALES</strong></th>
+        </tr>
+        <tr>
+            <td colspan="12">USUARIO : <?php echo $params->usuario; ?></td>
+        </tr>
+        <tr>
+            <td colspan="12">ODPE : <?php echo $params->nombreOdpe; ?></td>
+        </tr>
+        <tr>
+            <td colspan="1">FECHA: <?php echo substr($params->fecha,0,10); ?></td>
+            <td colspan="10">HORA: <?php echo substr($params->fecha,10); ?></td>
+        </tr>
+        <tr>
+            <th>Distrito</th>
+            <th>Local</th>
+            <th>Mesa</th>
+            <th>Presidente</th>
+            <th>Secretario</th>
+            <th>3er Miembro</th>
+            <th>1er Suplente</th>
+            <th>2do Suplente</th>
+            <th>3er Suplente</th>
+            <th>Entregadas</th>
+            <th>No Entregadas</th>
+            <th>% Entregadas</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php echo $sumTotalMesas = 0;; ?>
+
+        <?php echo $sumTotalPresidente = 0;; ?>
+
+        <?php echo $sumTotalSecretario = 0;; ?>
+
+        <?php echo $sumTotalTercerMiembro = 0;; ?>
+
+        <?php echo $sumTotalPrimerSup = 0;; ?>
+
+        <?php echo $sumTotalSegundoSup = 0;; ?>
+
+        <?php echo $sumTotalTercerSup = 0;; ?>
+
+        <?php echo $sumTotalEntregados = 0;; ?>
+
+        <?php echo $sumTotalNoEntregados = 0;; ?>
+
+        <?php foreach($data as $item): ?>
+        <tr>
+            <td> <?php echo $item->distrito; ?></td>
+            <td> <?php echo $item->local; ?></td>
+            <td> <?php echo $item->total_mesas; ?></td>
+            <td> <?php echo $item->presidente; ?></td>
+            <td> <?php echo $item->secretario; ?></td>
+            <td> <?php echo $item->tercer_miembro; ?></td>
+            <td> <?php echo $item->primer_sup; ?></td>
+            <td> <?php echo $item->segundo_sup; ?></td>
+            <td> <?php echo $item->tercer_sup; ?></td>
+            <td> <?php echo $item->entregados; ?></td>
+            <td> <?php echo $item->no_entregados; ?></td>
+            <td> <?php echo $item->porc_entregados; ?> <?php echo '%'; ?></td>
+        </tr>
+        <?php echo $sumTotalMesas = $sumTotalMesas + $item->total_mesas; ?>
+
+        <?php echo $sumTotalPresidente = $sumTotalPresidente + $item->presidente; ?>
+
+        <?php echo $sumTotalSecretario = $sumTotalSecretario + $item->secretario; ?>
+
+        <?php echo $sumTotalTercerMiembro = $sumTotalTercerMiembro + $item->tercer_miembro; ?>
+
+        <?php echo $sumTotalPrimerSup = $sumTotalPrimerSup + $item->primer_sup; ?>
+
+        <?php echo $sumTotalSegundoSup = $sumTotalSegundoSup + $item->segundo_sup; ?>
+
+        <?php echo $sumTotalTercerSup = $sumTotalTercerSup + $item->tercer_sup; ?>
+
+        <?php echo $sumTotalEntregados = $sumTotalEntregados + $item->entregados; ?>
+
+        <?php echo $sumTotalNoEntregados = $sumTotalNoEntregados + $item->no_entregados; ?>
+
+        <?php endforeach; ?>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>TOTAL</th>
+            <th></th>
+            <th><?php echo $sumTotalMesas; ?></th>
+            <th><?php echo $sumTotalPresidente; ?></th>
+            <th><?php echo $sumTotalSecretario; ?></th>
+            <th><?php echo $sumTotalTercerMiembro; ?></th>
+            <th><?php echo $sumTotalPrimerSup; ?></th>
+            <th><?php echo $sumTotalSegundoSup; ?></th>
+            <th><?php echo $sumTotalTercerSup; ?></th>
+            <th><?php echo $sumTotalEntregados; ?></th>
+            <th><?php echo $sumTotalNoEntregados; ?></th>
+            <th><?php echo round($sumTotalEntregados*100/$sumTotalNoEntregados,3); ?> <?php echo '%'; ?></th>
+        </tr>
+    </tfoot>
+</table>

@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?= HTML::style('css/library/boostrap/bootstrap.min.css') ?>
+        <?= HTML::style('css/main.css') ?>
+        
+        <?= HTML::style('css/login.css') ?>
+        <?= HTML::style('css/base.css') ?>
+        <?= HTML::style('css/media.css') ?>
+        
+        <?= HTML::script('js/library/jquery-2.1.0.min.js') ?>
+        <?= HTML::script('js/library/angular.min.js') ?> 
+        <?= HTML::script('js/library/bootstrap.min.js') ?>   
+        <?= HTML::script('js/library/ui-bootstrap-tpls-0.14.3.min.js') ?>    
+        <?= HTML::script('js/app.js') ?>        
+
+        <link rel="icon" type="image/ico" href="<?php echo e(asset('favicon.ico')); ?>">
+        <?php echo $__env->yieldContent('css'); ?>
+    </head>
+    <body ng-app="app" >
+        <?php if(Session::get('usuario.perfilid')): ?>
+        <section id="">    
+        <?php else: ?>
+        <section id="contenedor">  
+        <?php endif; ?>
+            <div class="container-fluid">
+                <div class="wrap_logo_onpe2" id="logo_onpe2"></div>
+                <section class="col_iz" id="sidebar">
+
+                </section>
+                <div class="bg_ocultar"><div id="ocultar"></div></div>
+                <div style="width: 100%">
+                    <section class="row no-gutter">
+                        <?php if(Session::get('usuario.perfilid') && !isset($hide)): ?>
+                        <header class="clearfix" ng-controller="ctrlLink">
+                            <div class="contenido">
+                                <div class="cabecera">
+                                    <div class="cabecera-logoeva"><img src="<?php echo URL::to('/'); ?>/img/Eva-logo.png" alt="EVA"></div>
+                                    <a href="<?php echo URL::to('/'); ?>" class="cabecera-atras"><img src="<?php echo URL::to('/'); ?>/img/atras-ico.png"  alt="EVA"></a>
+                                    <?php if(Input::get('mod')!==null): ?>
+                                        <div class="cabecera-ico_mod">
+                                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                                <img src="<?php echo URL::to('/'); ?>/img/mod_blanco_<?php echo Input::get('mod'); ?>.png"  alt="EVA">
+                                            </div>
+                                            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 cabecera-text_mod">
+                                                    <?php echo ucfirst(strtolower(UxModulo::find(Input::get('mod'))->c_descripcion)); ?>
+
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="cabecera-titulo"><span id="spanNameEleccion"><?php echo Session::get('proceso.nombre'); ?></span></div>
+                                    <div class="cabecera-logo_onpe"><img src="<?php echo URL::to('/'); ?>/img/Eva- Logo ONPE.png" alt="ONPE"></div>
+                                        <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2 usuarios showhide">
+                                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="<?php echo URL::to('/'); ?>/img/admin-ico.png" alt="EVA"></div>
+                                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"><label class="c_usuario"><?php echo Session::get('usuario.username'); ?><br/>(<?php echo Session::get('usuario.perfilName'); ?>)</label></div>
+                                            <div class="slidediv"><a href="#" class="cerrar-sesion" data-toggle="modal" data-target="#modalCloseSession">CERRAR SESIÓN</a></div>
+                                        </div>
+                                </div>
+
+                            </div>
+                        </header>
+                        <?php endif; ?>
+                        <div class="">
+                                                        
+                            <div class="menu">
+                                <!--<?php if(Session::get('menu')): ?>
+                                    <?php foreach(Session::get('menu') as $value): ?>
+                                    <a href="<?php echo URL::to($value->c_url); ?>"><?php echo $value->c_descripcion; ?></a>
+                                    <?php endforeach; ?>                                
+                                <?php endif; ?>-->
+                            </div>                            
+                            
+                            <div class="" >                   
+                                <?php echo $__env->yieldContent('content'); ?>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        <?php if(Session::get('usuario.perfilid')): ?>
+        <div class="content-footer">
+            <div class="row no-gutter">
+                <div class="col-xs-6 col-sm-8 col-md-10 col-lg-10">
+                </div>                
+            </div>
+        </div>
+        <?php endif; ?>
+            <div class="modal fade" id="modalCloseSession" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="ctrlLink">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content modal-close-session">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">INFORMACIÓN</h4>
+                        </div>
+                        <div class="modal-body">
+                            ¿Está seguro de cerrar sesión?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn-cuadrado btn-confirm-close-session btn-accept" href="#" ng-click="salir()" ng-cloak>&nbsp;&nbsp;&nbsp;&nbsp;Aceptar&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                            <button type="button" class="btn-cuadrado btn-cancel-close-session btn-cancel" data-dismiss="modal">&nbsp;&nbsp;&nbsp;&nbsp;Cancelar&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+
+        </section>
+        <?= HTML::script('js/index.js') ?>
+        <?php echo $__env->yieldContent('javascript'); ?> 
+    </body>
+</html>

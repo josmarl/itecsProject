@@ -1,0 +1,167 @@
+@charset "utf-8";
+/* CSS Document */
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+img{
+    border:none;
+}
+a{
+    text-decoration: none;
+    outline: 0px!important;
+}
+
+ol,ul,li{
+
+    list-style: none;
+}
+head{height: 100%;}
+body{
+    height: 100%;font-family:Arial, Verdana;
+    /*background:url(../img/bg-fondo.jpg) repeat-x;*/
+}
+
+html, body{height: 100%;}
+//---------------------------EVA-----------------------------------
+
+contenido{
+    background:	#fff;
+}
+.cabecera{
+    width: 100%;
+    background: #067777 none repeat scroll 0% 0%;
+    height: 81px;
+}
+.ico_excel{
+    background: #1CB1B1 none repeat scroll 0% 0%;
+    background-image: url('../img/excel_ico_blanco.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60px;
+    border: none;
+    height: 100%;
+    width: 230px;
+    bottom:0;
+    left: 0;
+    height:80px;
+    width:100px;
+    position:absolute;
+    z-index:2000;
+}
+
+.cabecera-text_mod{
+    margin-left: 12px;
+}
+.cabecera-ico_mod img{
+
+}
+.cabecera-ico_mod div{
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFF;
+}
+
+.cabecera-titulo{
+    float: left;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFF;
+    padding: 0.5% 0.8%;
+    opacity: 0.7;
+    display: flex !important;
+    align-items: center;
+    height: 100%;
+}
+.cabecera-titulo span{
+    font-size: 22px;
+}
+.cabecera-logo-sistemas{
+    margin-right: 0px;
+    float: right;
+    text-align: center;
+}
+.cabecera-logo-upeu{
+    margin-right: 0px;
+    float: left;
+    text-align: center;
+}
+.cabecera-ico_admin{
+    float:right;
+    height: 81px;
+    width: 180px;
+    background:	#139A9A;
+    padding:8px 0px 8px 0px;
+    margin-right:0px;
+}
+.cabecera-ico_admin img{
+    float: top;
+    margin-left: 40%;
+    width:35px;
+    height:50px; 
+}
+.cabecera-ico_admin div{
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    opacity: 0.7;
+}
+
+.cabecera-ico_admin div span{
+    font-size: 18px;
+}
+
+
+.content-footer{
+    float: bottom!important;;
+    height: 10%;
+    font-size: 11px;
+    text-align: center;
+}
+
+.navbar{
+    margin-bottom: 0px!important;
+}
+
+.modal-header{
+    background: #18BC9C!important;
+    color: #FFF;
+}
+
+.navbar-brand {
+    padding: 0px;
+}
+.navbar-brand>img {
+    height: 100%;
+    padding: 5px;
+    width: auto;
+}
+
+.paragraf-project{
+    font-size: 14px!important;
+    font-weight: lighter;
+}
+
+th{
+    background: #18BC9C!important;
+    color: #FFF;
+    font-weight: bold!important;
+}
+
+.menu-button{
+    margin-top: 15px;
+}
+
+.nav-link{
+    cursor: pointer;
+}
+
+.panel-system{
+   display: block;
+}

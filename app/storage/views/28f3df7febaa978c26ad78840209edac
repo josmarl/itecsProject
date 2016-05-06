@@ -1,0 +1,14 @@
+<?php $__env->startSection('content'); ?>
+
+
+<section>
+    <div class="container">
+        Bienvenido
+    </div> 
+</section>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection("javascript"); ?>        
+<?= HTML::script('js/dashboard.js') ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

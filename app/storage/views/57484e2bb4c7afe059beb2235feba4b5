@@ -1,0 +1,54 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+th{text-align: center;}
+</style>
+<table border="1"  >
+	<tr>
+		<td align="right" colspan="6" style="text-align: center;">REPORTE DE MESA POR LOCAL</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="4">&nbsp;</td>
+	</tr>
+	<tr>
+		<td >Usuario: </td>
+		<td colspan="3"><?php echo $params->usuario; ?></td>
+		<tr>
+			<td ><?php echo $tipoAmbito; ?>:</td>
+			<td colspan="3"><?php echo $params->ambito; ?></td>
+		</tr>
+
+		<tr>
+			<td>Fecha Reporte</td>
+			<td><?php echo substr($params->fecha,0,10); ?></td>
+			<td>Hora</td>
+			<td><?php echo substr($params->fecha,10); ?></td>
+		</tr>
+	</table>
+	<table  border="1" >
+		<tr>
+			<th>Número de Mesa</th>
+			<th>Presidente</th>
+			<th>Secretario</th>
+			<th>3er Miembro</th>
+			<th>1er Suplente</th>
+			<th>2do Suplente</th>
+			<th>3er Suplente</th>
+			<th>Estado</th>
+		</tr>
+		<?php foreach($data as $item): ?>
+		<tr>    
+			<td > <?php echo $item->c_mesa_rec; ?></td>
+			<td > <?php if($item->presidente===null): ?> 0 <?php else: ?> 1 <?php endif; ?></td>
+			<td > <?php if($item->secretario===null): ?> 0 <?php else: ?> 1 <?php endif; ?></td>
+			<td > <?php if($item->tercer_miembro===null): ?> 0 <?php else: ?> 1 <?php endif; ?></td>
+			<td > <?php if($item->primer_suplente===null): ?> 0 <?php else: ?> 1 <?php endif; ?></td>
+			<td > <?php if($item->segundo_suplente===null): ?> 0 <?php else: ?> 1 <?php endif; ?></td>
+			<td > <?php if($item->tercer_suplente===null): ?> 0 <?php else: ?> 1 <?php endif; ?></td>
+			<td > 
+				<?php if($item->estado === 0): ?> CRÍTICA <?php endif; ?>
+				<?php if($item->estado >= 1 && $item->estado < 3): ?> INCOMPLETA <?php endif; ?>
+				<?php if($item->estado >= 3): ?> COMPLETA <?php endif; ?>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+</table>

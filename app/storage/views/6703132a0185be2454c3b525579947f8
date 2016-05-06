@@ -1,0 +1,159 @@
+<?php $__env->startSection('content'); ?>
+<section ng-controller="ctrlBuscarMesa">
+    <div class="form-group">
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border legend-label versalita">Contenido</legend>
+            <div class="row">
+                <!--<form action="<?php echo URL::to('/'); ?>/usuario/login" method="post" >-->
+                <label>
+                    <input type="radio" id="q128" name="quality[21]" value="1" checked="checked" ng-click="porMesa()" /> Buscar por Mesa
+                </label> 
+                <label>
+                    <input type="radio" id="q129" name="quality[21]"  value="2" ng-click="porDistrito()"/> Buscar por Distrito
+                </label>
+
+                <div class="" ng-show="showPorMesa">
+                    <div class="form-group clearfix">
+                        <label for="inputPassword" class="col-lg-2 control-label">Ingresar Mesa</label>
+                        <div class="col-lg-12">
+                            <?php echo Form::text('n_mesa',null,array('class' =>'form-control','placeholder'=>'I...','id'=>'n_mesa','name'=>'username','ng-model'=>'n_mesa','ng-keyup'=>'validateEmptyLogin()','maxlength'=>'6','autocomplete'=>'off'));; ?>
+
+                        </div>
+                    </div> 
+
+                    <div class="form-group clearfix">
+                        <div class="col-md-10 col-md-offset-1">
+                            <input type="submit" ng-click="searchMesa()" class="col-sm-12" value="Buscar">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="" ng-show="showPorDistrito">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border legend-label versalita">Buscar Por Ubigeo</legend>
+
+                        <label class="col-sm-2">ODPE</label>
+                        <div class="col-md-10">
+
+                                <?php if(count($ambitos)>1): ?>
+                                <select class="combobox form-control" required="1" ng-model="Odpe" ng-change="listarOdpe()">                                        
+                                    <option value="0" ng-selected>- Seleccione -</option>
+                                    <?php foreach( $ambitos as $item): ?>
+                                    <option  value="<?php echo $item->n_ambito_pk; ?>" ><?php echo $item->c_alias; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <?php else: ?>
+                                    <input type="hidden" value="<?php echo Session::get('usuario.ambito'); ?>" id="ambito" >
+                                    <input class="col-md-10 form-control" type="text" value="<?php echo $ambitos->c_alias; ?>">
+                                <?php endif; ?>
+                        </div>
+
+                        <label class="col-sm-2">Distrito:</label>
+                        <div class="col-md-10">
+                            <select class="combobox form-control" required="1" ng-model="Distrito" ng-change="listarLocal()">                                        
+                                <option value="" ng-selected>- Seleccione -</option>
+                                <option ng-repeat="item in lDistritos" value="[[item.c_ubigeo_pk]]" >[[item.c_distrito]]</option>
+                            </select>
+                        </div>
+
+                        <div class="clearfix1"></div>
+                        <label class="col-sm-2">Locales:</label>
+                        <div class="col-md-10">
+                            <select class="combobox form-control" required="1" ng-model="Local" ng-change="listarMesas()">                                        
+                                <option value="" ng-selected>- Seleccione -</option>
+                                <option ng-repeat="item in lLocales" value="[[item.c_local_pk]]" >[[item.c_nombre]]</option>
+                            </select>                                 
+                        </div>
+
+                        <div class="clearfix1"></div>
+                        <label class="col-sm-2">Filtrar por Mesas:</label>
+                        <div class="col-md-10">
+                            <select class="combobox form-control" name="theinput3" id="theinput3" required="1" ng-model="filtroMesas">                                        
+                                <option value="" ng-selected>NINGUN FILTO</option>
+                                <option value="1" >CRÍTICAS</option>
+                                <option value="2" >INCOMPLETAS</option>
+                                <option value="3" >COMPLETAS</option>
+                            </select>
+                        </div>
+
+                    </fieldset>
+
+                    <div class="form-group clearfix">
+                        <div class="col-md-10 col-md-offset-1">
+                            <input type="submit" ng-click="searchDistrito()" class="col-sm-12" value="Buscar">
+                        </div>
+                    </div>
+                </div>
+                <!--</form>-->
+            </div>            
+            <div class="row">
+                <div id="load"></div>
+                <fieldset class="scheduler-border" ng-show="showResMesa">
+                    <div class="col-md-12">                                
+                        <div class="form-scroll-head">
+                            <table class="table table-striped table-excel heading">
+                                <thead>
+                                    <tr>
+                                        <th width="30%">Nro de Mesa.</th>
+                                        <th width="10%">Presidente</th>
+                                        <th width="10%">Secretario</th>
+                                        <th width="10%">3er Miembro</th>
+                                        <th width="10%">1er Suplente</th>
+                                        <th width="10%">2do Suplente</th>
+                                        <th width="20%">3er Suplente</th>
+                                        <th width="20%">Estado</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="form-scroll">
+                            <form>
+                                <table class="table table-striped table-excel">
+                                    <tbody>
+                                        <tr ng-if="dataMesa.success === true" ng-repeat="item in dataMesa.data">
+                                            <td width="30%" scope="row" class="table-spacing center-input">[[item.c_mesa_rec]]</td>                                            
+                                            
+                                            <td ng-if="item.presidente != null" width="10%" class="table-spacing"><div class="recogio">/</div></td>
+                                            <td ng-if="item.presidente == null" width="10%" class="table-spacing"><div class="no-recogio">X</div></td>
+                                            
+                                            <td ng-if="item.secretario != null" width="10%" class="table-spacing"><div class="recogio">/</div></td> 
+                                            <td ng-if="item.secretario == null" width="10%" class="table-spacing"><div class="no-recogio">X</div></td> 
+                                            
+                                            <td ng-if="item.tercer_miembro != null" width="10%" class="table-spacing"><div class="recogio">/</div></td>
+                                            <td ng-if="item.tercer_miembro == null" width="10%" class="table-spacing"><div class="no-recogio">X</div></td>
+                                            
+                                            <td ng-if="item.primer_suplente != null" width="10%" class="table-spacing"><div class="recogio">/</div></td>
+                                            <td ng-if="item.primer_suplente == null" width="10%" class="table-spacing"><div class="no-recogio">X</div></td>
+                                            
+                                            <td ng-if="item.segundo_suplente != null" width="10%" class="table-spacing"><div class="recogio">/</div></td>
+                                            <td ng-if="item.segundo_suplente == null" width="10%" class="table-spacing"><div class="no-recogio">X</div></td>
+                                            
+                                            <td ng-if="item.tercer_suplente != null" width="20%" class="table-spacing"><div class="recogio">/</div></td>
+                                            <td ng-if="item.tercer_suplente == null" width="20%" class="table-spacing"><div class="no-recogio">X</div></td>
+                                            
+                                            <td ng-if="item.estado == 0" width="20%" class="table-spacing">rojo</td>                                       
+                                            <td ng-if="item.estado <= 2 && item.estado >= 1" width="20%" class="table-spacing">amarillo</td>
+                                            <td ng-if="item.estado >= 3" width="20%" class="table-spacing">verde</td>
+                                        </tr>
+                                        <tr ng-if="dataMesa.success === false">
+                                            <td width="30%">[[dataMesa.message]]</td>
+                                        </tr>
+                                    </tbody>                                       
+
+                                </table>
+                            </form>
+                        </div>
+                        <div class="row space-div left-div right-div">                            
+                            <button ng-click="excelEstadoMesas()" class="btn btn-descargar-cargo" ng-disabled="dataMesa.success!==true">Exportar a Excel</button>                               
+                        </div>                
+                    </div>
+                </fieldset>
+            </div>
+        </fieldset>
+    </div>
+</section>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection("javascript"); ?>        
+<?= HTML::script('js/buscamesa.js') ?> 
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

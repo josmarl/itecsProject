@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Registro Automatizado de Electores</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <?= HTML::style('css/style.css') ?>
+        <?= HTML::style('css/bootstrap.css') ?>
+        <?= HTML::style('css/bootstrap.min.css') ?>
+        <?= HTML::style('css/library/awesome-4.1.0/font-awesome.min.css') ?>
+        <?= HTML::style('css/animate.css') ?>
+        <?= HTML::style('css/bootstrap.css.map') ?>
+        <?= HTML::script('js/library/jquery/jquery-2.1.0.min.js') ?>
+        <?= HTML::script('js/library/jquery/jquery-ui.js') ?>
+        <?= HTML::script('js/library/angularjs/angular-1.3.min.js') ?>
+        <?= HTML::script('js/library/angularjs/app.js') ?>
+        <?= HTML::script('js/other/inactividadController.js') ?>
+        <?= HTML::script('js/other/inactividadSession.min.js') ?>
+        <?= HTML::script('js/library/angularjs/angular-file-upload.min.js') ?>                
+        <?= HTML::script('js/jquery.form.js') ?>
+        <?= HTML::script('js/library/bootstrap/bootstrap-3.2.0.min.js') ?>
+        <?= HTML::script('js/library/bootstrap/tooltip.js') ?>
+        <?= HTML::script('js/library/jquery/jquery.nicefileinput.js') ?>
+
+        <?php echo $__env->yieldContent('javascript-ini'); ?>
+
+        <link rel="icon" type="image/ico" href="<?php echo e(asset('favicon.ico')); ?>">
+        <?php echo $__env->yieldContent('css'); ?>
+    </head>
+    <body ng-app="app" class="body-app">
+
+        <header>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="login-logo"><?php echo HTML::image('img/plantilla/logo-onpe.png', 'ONPE', array('class' => 'logo-onpe')); ?></div>
+                    <div class="login-title"><?php echo HTML::image('img/plantilla/title-app-head.png', 'ONPE'); ?></div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-6">
+                        <label>Bienvenido:</label>
+                        <b><?php echo $__env->make('layouts.dashboard.info-user', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?></b>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-6">
+                        <button class="btn-close-session" data-toggle="modal" data-target="#modalCloseSession">
+                            <?php echo HTML::image('img/plantilla/cerrar-session.png', 'a ONPE'); ?>
+
+                            <br>
+                            <label>Cerrar Sesión</label>
+                        </button>
+                    </div>
+                </div>
+            </div> 
+        </header>
+
+        <section class="clearfix">                       
+            <div class="col-sm-6 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3" <?php echo isset($controller)?'ng-controller='.$controller:''; ?> >
+                <div ng-controller="ctrlLink">
+                    <input id="perfil" type="hidden" value="<?php echo Session::get('usuario.perfil'); ?>"/>
+                    <button id="return" href="#" ng-click="MenuReturn()" type="button" class="btn btn-menu"/>
+                </div>
+                <div>                   
+                    <!--<?php echo $__env->yieldContent('filter'); ?>-->
+                    <?php echo $__env->yieldContent('content'); ?>
+                </div>
+                <div class="bg_ocultar_right2"><div id="ocultar_rigth2"></div></div>
+            </div>             
+        </section>
+
+        <!-- Modal close session-->
+        <div class="modal fade" id="modalCloseSession" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="ctrlLink">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content modal-close-session">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Información</h4>
+                    </div>
+                    <div class="modal-body">
+                        ¿Está seguro de cerrar sesión?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-cuadrado btn-confirm-close-session" href="#" ng-click="salirRA()" ng-cloak>Aceptar</button>
+                        <button type="button" class="btn btn-default btn-cuadrado btn-cancel-close-session" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="login-footer border-footer">
+                Copyright 2015 © Oficina Nacional de Procesos Electorales - ONPE 
+            </div>
+        </footer>       
+        <?= HTML::script('js/library/angularjs/controllers/link.js') ?>
+        <?= HTML::script('js/library/jquery/jquery.jqGrid.min.js') ?>     
+        <?php echo $__env->yieldContent('javascript'); ?> 
+    </body>
+</html>

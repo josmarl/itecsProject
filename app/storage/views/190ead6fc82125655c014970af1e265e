@@ -1,0 +1,4 @@
+<div class='info-usuario'>
+    <?php echo Session::get('usuario.nombre'); ?> <?php echo mb_strtoupper(Session::get('usuario.username')); ?>
+
+</div>

@@ -1,0 +1,52 @@
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+	th{text-align: center;}
+</style>
+<table border="1"  >
+	<tr>
+		<td align="right" colspan="6" style="text-align: center;"> <strong>REPORTE DE REGISTRO DE CREDENCIALES</strong></td>
+	</tr>
+	<tr>
+		<td align="center" colspan="4">&nbsp;</td>
+	</tr>
+	<tr>
+		<td >Usuario: </td>
+		<td colspan="3"><?php echo $params->usuario; ?></td>
+	<tr>
+		<td ><?php echo $tipoAmbito; ?>:</td>
+		<td colspan="3"><?php echo $params->ambito; ?></td>
+	</tr>
+	<tr>
+		<td>Fecha Inicio</td>
+		<td><?php echo $params->fechaIni; ?></td>
+		<td>Fecha Fin</td>
+		<td><?php echo $params->fechaFin; ?></td>
+	</tr>
+	<tr>
+		<td>Fecha Reporte</td>
+		<td><?php echo substr($params->fecha,0,10); ?></td>
+		<td>Hora</td>
+		<td><?php echo substr($params->fecha,10); ?></td>
+	</tr>
+</table>
+<table  border="1" >
+	<tr>
+		<th>ODPE</th>
+		<th>DNI</th>
+		<th>Mesa</th>
+		<th>Apellidos y Nombres</th>
+		<th>Fecha Registro</th>
+		<th>Usuario</th>
+	</tr>
+	<?php foreach($data as $item): ?>
+	<tr>
+		<td > <?php echo $item->odpe; ?></td>
+		<td > <?php echo $item->dni; ?></td>
+		<td > <?php echo $item->mesarec; ?></td>
+		<td > <?php echo $item->appat; ?> <?php echo $item->apmat; ?>, <?php echo $item->nombres; ?></td>
+		<td > <?php echo $item->fecha; ?></td>
+		<td > <?php echo $item->usuario; ?></td>
+	</tr>
+	<?php endforeach; ?>
+</table>
